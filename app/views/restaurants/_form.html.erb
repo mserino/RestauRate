@@ -1,0 +1,20 @@
+<% if @restaurant.errors.any? %>
+	<h2>Errors</h2>
+	<ul>
+		<% @restaurant.errors.full_messages.each do |e| %>
+			<li><%= e %></li>
+		<% end %>
+	</ul>
+<% end %>
+
+<%= form_for @restaurant do |form| %>
+
+	<%= form.label :name %>
+	<%= form.text_field :name %>
+
+	<%= form.label :cuisine %>
+	<%= form.text_field :cuisine %>
+
+	<%= form.submit %>
+
+<% end %>

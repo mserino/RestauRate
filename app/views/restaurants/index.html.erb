@@ -1,0 +1,21 @@
+<ul>
+	<% if @restaurants.any? %>
+	  <% @restaurants.each do |r| %>
+	    <li>
+	    	<%= r.name %> (<%= r.cuisine %>)<br>
+				Average rating: <%= star_rating(r.average_rating) %>
+	    		<ul>
+	    			<% r.reviews.each do |review| %>
+	    			<li><%= review.thoughts %> (<%= review.rating %>)</li>
+	    			<% end %>
+	    		</ul>
+
+				<%= link_to "Edit #{r.name}", edit_restaurant_path(r.id) %><br>
+				<%= link_to "Delete #{r.name}", restaurant_path(r.id), method: :delete, 'data-confirm' => "Are you sure you want to delete #{r.name}?" %><br>
+				<%= link_to "Review #{r.name}", new_restaurant_review_path(r.id) %>
+			</li>
+	  <% end %>
+	<% else %>
+	  <h1>No restaurants yet</h1>
+	<% end %>
+</ul>
