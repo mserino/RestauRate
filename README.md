@@ -1,4 +1,4 @@
-== Yelpy
+== RestauRate
 
 Week #8 project for Makers Academy
 
