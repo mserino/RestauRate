@@ -15,13 +15,14 @@
 	    		</ul>
 
 	    		<!-- average rating -->
-		    	<p>Average rating:
-		    	<span class='average_rating'>
-		    		<%= star_rating(restaurant.average_rating) %>
-		    	</span>
-		    	<span class ='review_count'>
-		    		(<%= restaurant.reviews.count %> reviews)
-		    	</span>
+		    	<p>
+			    	Average rating:
+			    	<span class='average_rating'>
+			    		<%= star_rating(restaurant.average_rating) %>
+			    	</span>
+			    	<span class ='review_count'>
+			    		(<%= restaurant.reviews.count %> reviews)
+			    	</span>
 		    	</p>
 
 		    	<!-- edit and delete -->

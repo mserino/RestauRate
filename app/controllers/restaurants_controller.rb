@@ -22,13 +22,17 @@ class RestaurantsController < ApplicationController
   end
 
   def edit
-  	@restaurant = Restaurant.find params[:id]
+  	@restaurant = current_user.restaurants.find params[:id]
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = 'Not your restaurant!'
+      redirect_to '/restaurants'
   end
 
   def update
   	@restaurant = Restaurant.find params[:id]
   	@restaurant.update restaurant_params
-  	redirect_to '/restaurants'
+    flash[:notice] = "Successfully updated #{@restaurant.name}"
+    redirect_to '/restaurants'
   end
 
   def destroy
@@ -36,7 +40,7 @@ class RestaurantsController < ApplicationController
     @restaurant.destroy
     flash[:notice] = "Successfully deleted #{@restaurant.name}"
     rescue ActiveRecord::RecordNotFound
-      flash[:notice] = 'Not your restaurant!'
+      flash[:alert] = 'Not your restaurant!'
     ensure
       redirect_to '/restaurants'
   end
