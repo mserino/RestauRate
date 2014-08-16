@@ -124,15 +124,5 @@ describe 'restaurant editing and deleting' do
         expect(page).to have_content 'Kentucky Fried Chicken'
       end
     end
-
-    context 'deleting restaurants' do
-
-        it 'can delete a restaurant' do
-          visit '/restaurants'
-          expect(page).to have_content 'Delete KFC'
-          click_link 'Delete KFC'
-          expect(page).to have_content 'Successfully deleted KFC'
-        end    
-    end
   end
 end
