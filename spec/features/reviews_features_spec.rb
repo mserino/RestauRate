@@ -5,7 +5,7 @@ describe 'writing reviews' do
 
 	it 'should add the review to the restaurant' do
 		leave_review('Not great', '2')
-		expect(page).to have_content 'Not great (2)'
+		expect(page).to have_content 'Not great (★★☆☆☆)'
 	end
 end
 
@@ -23,7 +23,6 @@ end
 
 def leave_review(thoughts, rating)
 	visit '/restaurants'
-	click_link 'Review KFC'
 	fill_in 'Thoughts', with: thoughts
 	select rating, from: 'Rating'
 	click_button 'Create Review'	

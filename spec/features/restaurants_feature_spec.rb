@@ -59,9 +59,6 @@ describe 'validity' do
     expect(restaurant).to have(2).error_on(:name)
     expect(restaurant).not_to be_valid
   end
-# pending
-  it 'should allow a name starting with a number'
-# end pending
   it 'should have a name with the first letter capitalized' do
     restaurant = Restaurant.new(name: 'burger king')
     expect(restaurant).to have(1).error_on(:name)
