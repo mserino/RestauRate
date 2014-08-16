@@ -7,9 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<h1>YelpMay</h1>
+<h1><a href='/'>RestauRate</a></h1>
+<h2>Say what you think, don't be shy</h2>
 
-<%= notice %>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<% if user_signed_in? %>
+  <p><%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+  <%= link_to('Edit user details', edit_user_registration_path) %></p>
+<% else %>
+  <p><%= link_to('Login', new_user_session_path)  %>
+  <%= link_to('Register', new_user_registration_path)  %></p>
+<% end %>
+
 <%= yield %>
 
 

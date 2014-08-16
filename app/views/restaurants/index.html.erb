@@ -4,31 +4,45 @@
 		  <% @restaurants.each do |restaurant| %>
 		    <li class='restaurant'>
 
+		    	<!-- restaurant name and cuisine -->
 		    	<%= restaurant.name %> (<%= restaurant.cuisine %>)<br>
 		    	
+		    	<!-- reviews -->
 	    		<ul class='reviews'>
 	    			<% restaurant.reviews.each do |review| %>
 	    			<li><%= review.thoughts %> (<%= star_rating review.rating %>)</li>
 	    			<% end %>
 	    		</ul>
 
-		    	<p>Average rating: <span class='average_rating'><%= star_rating(restaurant.average_rating) %></span></p>
+	    		<!-- average rating -->
+		    	<p>Average rating:
+		    	<span class='average_rating'>
+		    		<%= star_rating(restaurant.average_rating) %>
+		    	</span>
+		    	<span class ='review_count'>
+		    		(<%= restaurant.reviews.count %> reviews)
+		    	</span>
+		    	</p>
 
-					<%= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant.id) %><br>
-					<%= link_to "Delete #{restaurant.name}", restaurant_path(restaurant.id), method: :delete, 'data-confirm' => "Are you sure you want to delete #{restaurant.name}?" %><br>
+		    	<!-- edit and delete -->
+					<% if user_signed_in? %>
+						<%= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant.id) %><br>
+						<%= link_to "Delete #{restaurant.name}", restaurant_path(restaurant.id), method: :delete, 'data-confirm' => "Are you sure you want to delete #{restaurant.name}?" %><br>
+					<% end %>
 
 					<!-- review form -->
-					<%= form_for [restaurant, @review] do |form| %>
-						<%= form.label :thoughts %>
-						<%= form.text_area :thoughts %>
+					<% if user_signed_in? %>
+						<%= form_for [restaurant, @review] do |form| %>
+							<%= form.label :thoughts %>
+							<%= form.text_area :thoughts %>
 
-						<%= form.label :rating %>
-						<%= form.select :rating, 1..5 %>
+							<%= form.label :rating %>
+							<%= form.select :rating, 1..5 %>
 
-						<%= form.submit %>
+							<%= form.submit %>
+						<% end %>
 					<% end %>
 				</li>
-
 
 		  <% end %>
 		<% else %>
