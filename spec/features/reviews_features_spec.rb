@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'launchy'
 
 describe 'writing reviews' do
 	before { Restaurant.create name: 'KFC', cuisine: 'Chicken'}
@@ -31,6 +32,7 @@ describe 'average ratings' do
       user = User.create email: 'user@email.com', password: '12345678', password_confirmation: '12345678'
       login_as user
     end
+
 		it 'calculates and displays the avg rating' do
 			leave_review('Poor', '2')
 			leave_review('Great', '4')
@@ -50,5 +52,5 @@ def leave_review(thoughts, rating)
 	visit '/restaurants'
 	fill_in 'Thoughts', with: thoughts
 	select rating, from: 'Rating'
-	click_button 'Create Review'	
+	click_button 'Create Review'
 end
