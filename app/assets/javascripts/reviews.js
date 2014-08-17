@@ -4,7 +4,7 @@ $(document).ready(function(){
     var restaurant = $(this).closest('.restaurant');
 
     $.post($(this).attr('action'), $(this).serialize(), function(review) {
-      restaurant.find('ul.reviews').append('<li>' + review.thoughts + ' (' + review.rating + ')</li>')
+      restaurant.find('p.reviews').append('<p>' + review.thoughts + ' (' + review.rating + ')</p>')
       restaurant.find('.average_rating').text(review.new_average_rating)
       restaurant.find('.review_count').text('( ' + review.new_review_count + ' reviews )')
     }).always(function(){

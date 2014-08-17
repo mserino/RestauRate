@@ -1,57 +1,95 @@
-<div>
-	<ul>
+<div class='container'>
+<h2>Our restaurants</h2>
+
 		<% if @restaurants.any? %>
 		  <% @restaurants.each do |restaurant| %>
-		    <li class='restaurant'>
 
-		    	<!-- restaurant name and cuisine -->
-		    	<%= restaurant.name %> (<%= restaurant.cuisine %>)<br>
-		    	
-		    	<!-- reviews -->
-	    		<ul class='reviews'>
-	    			<% restaurant.reviews.each do |review| %>
-	    			<li><%= review.thoughts %> (<%= star_rating review.rating %>)</li>
-	    			<% end %>
-	    		</ul>
-
-	    		<!-- average rating -->
-		    	<p>
-			    	Average rating:
-			    	<span class='average_rating'>
-			    		<%= star_rating(restaurant.average_rating) %>
-			    	</span>
-			    	<span class ='review_count'>
-			    		(<%= restaurant.reviews.count %> reviews)
-			    	</span>
-		    	</p>
-
-		    	<!-- edit and delete -->
-					<% if user_signed_in? %>
-						<%= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant.id) %><br>
-						<%= link_to "Delete #{restaurant.name}", restaurant_path(restaurant.id), method: :delete, 'data-confirm' => "Are you sure you want to delete #{restaurant.name}?" %><br>
-					<% end %>
-
-					<!-- review form -->
-					<% if user_signed_in? %>
-						<%= form_for [restaurant, @review] do |form| %>
-							<%= form.label :thoughts %>
-							<%= form.text_area :thoughts %>
-
-							<%= form.label :rating %>
-							<%= form.select :rating, 1..5 %>
-
-							<%= form.submit %>
+		  <!-- main panel -->
+		  <div class="panel panel-default restaurant container">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">
+			    	<!-- restaurant name and cuisine -->
+			    	<%= restaurant.name %> (<%= restaurant.cuisine %>)
+			    <!-- edit and delete -->
+						<p class='navbar-right'>
+						<% if user_signed_in? %>
+							<%= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant.id), class: 'btn btn-xs btn-warning' %>
+							<%= link_to "Delete #{restaurant.name}", restaurant_path(restaurant.id), method: :delete, 'data-confirm' => "Are you sure you want to delete #{restaurant.name}?", class: 'btn btn-xs btn-warning' %>
 						<% end %>
-					<% end %>
-				</li>
+						</p>
+			    </h3>
+			  </div>
+
+			  <!-- review panel -->
+			  <div class="panel-body col-xs-6 col-md-4">
+			    <div class="panel panel-primary">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Reviews</h3>
+					  </div>
+					  
+					  <div class="panel-body">
+					    <!-- reviews -->
+					    <p class='reviews'>
+			    			<% restaurant.reviews.each do |review| %>
+			    			<p><%= review.thoughts %> (<%= star_rating review.rating %>)</p>
+			    			<% end %>
+			    		</p>
+					  </div>
+
+					  <div class="panel-footer">
+			    		<!-- average rating -->
+				    	<p>
+					    	Average rating:
+					    	<span class='average_rating'>
+					    		<%= star_rating(restaurant.average_rating) %>
+					    	</span>
+					    	<span class ='review_count'>
+					    		(<%= restaurant.reviews.count %> reviews)
+					    	</span>
+				    	</p>
+					  </div>
+					</div>
+			  </div> <!-- end review panel -->
+
+			  <!-- review panel -->
+			  <div class="panel-body col-xs-6 col-md-4">
+			    <div class="panel panel-warning">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Add a review</h3>
+					  </div>
+					  
+							<!-- review form -->
+								<% if user_signed_in? %>
+					 			<div class="panel-body">
+									<%= form_for [restaurant, @review] do |form| %>
+										<p>
+										<%= form.label :thoughts, class: 'control-label' %>
+										<%= form.text_area :thoughts, class: 'form-control' %>
+										</p>
+
+										<p>
+										<%= form.label :rating, class: 'control-label' %>
+										<%= form.select :rating, 1..5, class: 'form-control'%>
+										</p>
+					  			</div>
+
+										<div class='panel-footer'>
+											<%= form.submit class: 'btn btn-default' %>
+										</div>
+									<% end %>
+								<% else %>
+								<div class="panel-body">
+									<p>You must be logged in to leave a review</p>
+								</div>	
+								<% end %>
+							<!-- end review form -->
+
+					</div>
+			  </div> <!-- end review panel -->
+			</div> <!-- end main panel -->
 
 		  <% end %>
 		<% else %>
-		  <h1>No restaurants yet</h1>
+		  <h3>No restaurants yet</h3>
 		<% end %>
-	</ul>
-</div>
-
-<div>
-	<%= link_to 'Create restaurant', new_restaurant_path %>
 </div>
