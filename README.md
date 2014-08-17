@@ -6,10 +6,12 @@ Week #8 project for [Makers Academy](http://www.makersacademy.com)
 
 ##What is it?
 Fake version of Yelp
+
 Web application to review your favorite restaurants
 
 ##How can you use it?
 You can find a working version at the following link:
+
 [RestauRate](http://restaurate.herokuapp.com/)
 
 ##What can you do with it?
@@ -36,5 +38,5 @@ You can find a working version at the following link:
 - Adding some picture to restaurant
 - Implement like button
 
-##How does it look like?
+##What it looks like
 ![RestauRate](https://dl.dropboxusercontent.com/u/79955713/github/restaurate.png "RestauRate")
