@@ -1,7 +1,7 @@
 RestauRate
 ===========
 
-Week #8 project for [Makers Academy](http://www.makersacademy.com)
+Week #8 project for [Makers Academy](http://www.makersacademy.com).
 
 
 ##What is it?
